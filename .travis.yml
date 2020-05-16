@@ -24,6 +24,13 @@ matrix:
 before_install:
   - eval "${MATRIX_EVAL}"
 
+install:
+  # /usr/bin/gcc points to an older compiler on both Linux and macOS.
+  - if [ "$CXX" = "g++" ]; then export CXX="g++-9" CC="gcc-9"; fi
+  - echo ${CC}
+  - echo ${CXX}
+  - ${CXX} --version
+
 script:
   #- cmake .
   - make
